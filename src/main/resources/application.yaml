@@ -11,9 +11,9 @@ spring:
       hibernate:
         format_sql: true
 
-comments:
+hateoas:
     url:
-      base: http://localhost:9595/api/comments
+      base: http://localhost:9088/api/posts/
       postComments: ${comments.url.base}/{0}/post
       saveComments: ${comments.url.base}/saveAll
 
