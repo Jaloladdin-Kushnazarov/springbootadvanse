@@ -6,14 +6,8 @@ import org.example.springbootadvance.post.dto.CommentCreateDTO;
 import org.example.springbootadvance.post.dto.CommentDto;
 import org.example.springbootadvance.post.dto.PostCreateDto;
 import org.example.springbootadvance.post.dto.PostDto;
-import org.example.springbootadvance.resources.CommentResource;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.example.springbootadvance.resources.CommentClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -23,7 +17,7 @@ import java.util.List;
 public class PostServiseImpl implements PostServise {
 
     private final PostRepository postRepository;
-    private final CommentResource commentResource;
+    private final CommentClient commentClient;
 
 
     @Override
@@ -31,7 +25,7 @@ public class PostServiseImpl implements PostServise {
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Post not found by id: " + id));
 
-        List<CommentDto> comments = commentResource.getAllComments(post.getId());
+        List<CommentDto> comments = commentClient.getAllCommentsByPostId(post.getId());
 
         return PostDto.builder()
                 .id(post.getId())
@@ -58,6 +52,6 @@ public class PostServiseImpl implements PostServise {
 
     @Override
     public void createComments(@NonNull List<CommentCreateDTO> dtos) {
-        commentResource.saveAll(dtos);
+        commentClient.saveAllCommentsByPostId(dtos);
     }
 }
