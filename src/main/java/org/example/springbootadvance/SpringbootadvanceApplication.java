@@ -6,6 +6,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.cdi.Eager;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.Duration;
 
@@ -17,12 +18,9 @@ public class SpringbootadvanceApplication {
     }
 
 
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder
-                .connectTimeout(Duration.ofMillis(2000))
-                .readTimeout(Duration.ofMillis(2000))
-                .build();
-    }
+   @Bean
+    public WebClient webClient() {
+        return WebClient.create();
+   }
 
 }

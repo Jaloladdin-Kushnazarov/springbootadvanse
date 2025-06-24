@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserter;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.List;
 public class CommentResource {
 
     private final RestTemplate restTemplate;
+    private final WebClient webClient;
 
     @Value("${comments.url.postComments}")
     private String postCommentUrl;
@@ -29,32 +33,19 @@ public class CommentResource {
     private String saveAllCommentsUrl;
 
     public void saveAll(@NonNull List<CommentCreateDTO> dtos) {
-        HttpEntity<List<CommentCreateDTO>> httpEntity = new HttpEntity<>(dtos);
-        restTemplate.exchange(saveAllCommentsUrl, HttpMethod.POST, httpEntity, Void.class);
+        webClient.post()
+                .uri(saveAllCommentsUrl)
+                .body(BodyInserters.fromValue(dtos))
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block() ;
     }
 
     public List<CommentDto> getAllComments(Integer postId) {
-//        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url, List.class, post.getId()); //Coments Listini to'liq olish uchun
-//        List comments = responseEntity.getBody();
-
-
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setBearerAuth("token..... ");
-//        headers.add("Content-Type", "application/json");
-//        HttpEntity httpEntity = new HttpEntity(new Object(), headers);//bu requestni tariflab beruvchi object unga headeriga va bodysiga kerakli narsalar berib yuborilishi mumkin
-        try {
-            return restTemplate.exchange(
-                            postCommentUrl,
-                            HttpMethod.GET,
-                            HttpEntity.EMPTY,
-                            new ParameterizedTypeReference<List<CommentDto>>() {
-                            },
-                            postId)
-                    .getBody();
-        } catch (ResourceAccessException e) {
-            e.printStackTrace();
-        }
-        return Collections.emptyList();
-
+        return webClient.get()
+                .uri(postCommentUrl, postId)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<CommentDto>>() {})
+                .block() ;
     }
 }
