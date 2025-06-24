@@ -1,23 +1,23 @@
 package org.example.springbootadvance.post;
 
-import lombok.*;
-import org.springframework.data.annotation.Id;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.*;
 
 @Getter
 @Setter
-@ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Post {
-    @Id
-    private String postId;
 
+    @  Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String title;
-
     private String body;
-
-    private Integer userId;
-
-
 }
