@@ -23,7 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentResource {
 
-    private final RestTemplate restTemplate;
     private final WebClient webClient;
 
     @Value("${comments.url.postComments}")
