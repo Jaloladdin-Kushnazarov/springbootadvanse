@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="0003" author="Jaloladdin-Kushnazarov">
+       <insert tableName="tasks">
+           <column name="name" value="Read a Book"/>
+           <column name="description" value="a lot of time read!!!"/>
+       </insert>
+
+        <sql>
+            insert into tasks(name, description) values ('Bu sql usulida insert qilish', 'Hohlaganingdan foydalan qaysi biri qulay bo''lsa' )
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
