@@ -1,5 +1,4 @@
-package org.example.springbootadvance.post;
-
+package org.example.springbootadvance.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,15 +8,18 @@ import lombok.*;
 
 @Getter
 @Setter
-@Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Post {
-
-    @  Id
+public class Users {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String title;
-    private String body;
+
+    private String username;
+    private String password;
+    private String email;
+    private String otp;
+
 }
