@@ -15,7 +15,7 @@ import lombok.*;
 @Entity
 public class Post {
 
-    @  Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
