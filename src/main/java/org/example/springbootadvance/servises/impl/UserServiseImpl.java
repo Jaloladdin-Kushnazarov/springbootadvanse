@@ -2,7 +2,7 @@ package org.example.springbootadvance.servises.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.springbootadvance.controller.UserCreateDto;
+import org.example.springbootadvance.entity.UserCreateDto;
 import org.example.springbootadvance.entity.Users;
 import org.example.springbootadvance.event.OtpGenerateEvent;
 import org.example.springbootadvance.mappers.UsersMapper;
@@ -10,8 +10,6 @@ import org.example.springbootadvance.repository.UserRepository;
 import org.example.springbootadvance.servises.UserServise;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
-
-import java.beans.Transient;
 
 @Service
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package org.example.springbootadvance.controller;
+package org.example.springbootadvance.entity;
 
 import java.io.Serializable;
 

@@ -9,6 +9,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public class SendMailEvent {
 
+    private final Integer id;
     private final String email;
     private final String otp;
 }

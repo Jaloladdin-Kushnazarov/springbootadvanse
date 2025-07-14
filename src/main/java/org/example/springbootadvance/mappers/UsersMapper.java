@@ -1,6 +1,6 @@
 package org.example.springbootadvance.mappers;
 
-import org.example.springbootadvance.controller.UserCreateDto;
+import org.example.springbootadvance.entity.UserCreateDto;
 import org.example.springbootadvance.entity.Users;
 import org.mapstruct.*;
 
